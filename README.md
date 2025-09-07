@@ -1,12 +1,33 @@
-# React + Vite
+# Checkpoint 01 WEB
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Entrega: Repositorio en GitHub
+Setup: Crear el proyecto desde 0 -> npm create vite@latest checkpoint -template react
+Duración: 20 min Teórico 1h:40min Práctico
+Checkpoint teorico: https//forms.gle/DNEbfwr28QTHMX629
 
-Currently, two official plugins are available:
+## Objetivo
+Construir una aplicación en React llamada "BookTrack", que permite buscar libros y crear una lista de lectura personal.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Instrucciones
 
-## Expanding the ESLint configuration
+1. Búsqueda de Libros
+Crear un Input de búsqueda y un botón.Usar la API de Open Library.
+https://openlibrary.org/search.json?q=YOUR_QUERY&limit=10
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Mostrar los resultados en tarjetas con:
+
+- Título del libro
+- Autor principal
+- Año de publicación (si existe)
+- Un botón "Agregar a Lista"
+
+Manejar estados de cargando, error y sin resultados con renderizado condicional.
+
+2. Lista de Lectura
+- Debajo de los resultados, mostrar una lista de libros guardados.
+- Cada libro debe tener además de los datos iniciales:
+- - Estado de lectura (ej: "Pendiente", "Leyendo", "Terminado") -> seleccionado en un formulario controlado a partir de un select con options
+
+### Requisitos:
+Permitir editar y eliminar un libro de la lista
+Mostrar un mensaje si la lista está vacía.
