@@ -1,0 +1,19 @@
+.book-list {
+  margin: 30px 0;
+}
+
+.book-list h1 {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 10px;
+}
+
+.books-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}

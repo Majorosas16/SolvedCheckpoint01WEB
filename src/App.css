@@ -1,42 +1,110 @@
-#root {
-  max-width: 1280px;
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: block; /* Evita que el body actúe como flex container */
+}
+
+.app {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 40px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+form {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+input[type='text'] {
+  padding: 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 400px;
+  transition: border-color 0.3s ease;
 }
 
-.card {
-  padding: 2em;
+input[type='text']:focus {
+  outline: none;
+  border-color: #4CAF50;
 }
 
-.read-the-docs {
-  color: #888;
+button[type='submit'] {
+  padding: 14px 28px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+button[type='submit']:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.error {
+  color: #d32f2f;
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  width: 100%;
+}
+
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column; /* GIF arriba, texto abajo */
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.loading img {
+  width: 80px;   /* ajusta el tamaño del gif */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Asegurar que todos los contenedores hijos estén centrados */
+.app > * {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

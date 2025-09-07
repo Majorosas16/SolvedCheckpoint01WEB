@@ -1,36 +1,49 @@
 // Componente de cada libro renderizado tanto en la búsqueda como en la lista de leídos
+import './BooksItem.css';
 
-const BookItem = ({ book, handleClick, added }) => {
-
+const BookItem = ({ book, handleClick, added, handleChangeStatus, handleDelete, handleNotesChange }) => {
     return (
-    <>
-        <h3> {book.title}</h3>      
-        <p> Author: {book.author_name}</p>
-        <p> Year {book.first_publish_year || 'noYear'}</p>
-        
-        {/* Solo se muestra si no existe read */}
-        {!added && (
-            <button onClick={() => handleClick(book)}>Agregar a Lista</button>
-        )}
+        <div className="book-item" data-status={book.status}>
+            <h3>{book.title}</h3>      
+            <p><strong>Autor:</strong> {book.author_name || 'Desconocido'}</p>
+            <p><strong>Año:</strong> {book.first_publish_year || 'No disponible'}</p>
+            
+            {!added && (
+                <button onClick={() => handleClick(book)}>Agregar a Mi Biblioteca</button>
+            )}
 
-        {/* solo se muestran si existe read*/}
-        {added && (
-            <>
-                <select name="addedBooks" id="addedSelect">
-                    <option value="hold">Pendiente</option>
-                    <option value="read">Leyendo</option>
-                    <option value="finish">Terminado</option>
-                </select>
-                
-                <input 
-                    type="text" 
-                    placeholder="Notas personales"
-                />
-            </>
-        )}
-    </>
+            {added && (
+                <>
+                    <div className="controls-container">
+                        <select 
+                            value={book.status ?? 'Pendiente'} 
+                            onChange={(e) => handleChangeStatus(book, e.target.value)}
+                        >
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Leyendo">Leyendo</option>
+                            <option value="Terminado">Terminado</option>
+                        </select>
+                        <button onClick={() => handleDelete(book)}>Eliminar</button>
+                    </div>
+
+                    <textarea 
+                        value={book.notes || ''}
+                        onChange={(e) => handleNotesChange(book, e.target.value)}
+                        rows="5" 
+                        placeholder="Escribe aquí tus notas personales..."
+                    />
+                    
+                    {book.notes && (
+                        <div className="notes-preview">
+                            <p><strong>Tus notas:</strong> {book.notes}</p>
+                        </div>
+                    )}
+                </>
+            )}
+        </div>
     )
 }
 
+    
 export default BookItem;
 

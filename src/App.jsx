@@ -13,10 +13,6 @@ function App() {
     const [search, setSearch] = useState('');  
     const [added, setAdded] = useState([]);
     console.log(added);
-    
-    const [lectureState, setLectureState] = useState([]);
-
- const filteredBooks = books.filter((book) => book.title.toLowerCase().includes(search.toLowerCase()));  
 
     const handleSearch = async (e) => {
     e.preventDefault();
@@ -32,21 +28,45 @@ function App() {
     }
 
   if(error) return <p>Hay un error: {error}</p>
-  if(loading) return <p>Cargando.....</p>
+if (loading) {
+  return (
+    <div className="loading">
+      <img 
+        src="https://media.tenor.com/6rspVIGKsQIAAAAj/loading.gif" 
+        alt="Cargando..." 
+      />
+      <p>Cargando...</p>
+    </div>
+  );
+}
 
-  // Agregar libro a la lista de Libros leidos aquí
-      const handleClick = (item) => {
-      const booksAdded = [...added, item]; 
-      setAdded(booksAdded);
-    }
 
-      const lectureStateClick = (item) => {
-      const lectureStateC = [...lectureState, item]; 
-      setLectureState(lectureStateC);
+  // agregar libro a la lista de leídos
+    const handleClick = (book) => {
+    setAdded([...added, {...book, status: 'Pendiente', notes: ''}]);
+  }
+
+    const handleDelete = (item) => {
+    const booksFiltered = added.filter((book) => book !== item);
+    setAdded(booksFiltered);
     }
+  
+  // cambiar el estado del libro en la lista de leídos
+  const handleChangeStatus = (item, status) => {
+    const listStatusChanged = added.map((book) => book.key === item.key ? {...item, status } : book);
+    setAdded(listStatusChanged);
+  }
+
+  // cambiar las notas del libro en la lista de leídos
+  const handleNotesChange = (book, notes) => {
+  const listWithUpdatedNotes = added.map((b) => 
+    b.key === book.key ? {...b, notes} : b
+  );
+  setAdded(listWithUpdatedNotes);
+}
 
   return (
-    <>
+    <div className="app">
       
       <form onSubmit={(e) => handleSearch(e)}>
       <input type='text' 
@@ -57,10 +77,10 @@ function App() {
       <button type='submit'>Buscar</button>      
       </form>
 
-      <BookList books={books} handleClick={handleClick} lectureState={lectureStateClick}></BookList>
-      <ReadBooks added={added}></ReadBooks>
+      <BookList books={books} handleClick={handleClick}></BookList>
+      <ReadBooks added={added} handleDelete={handleDelete} handleChangeStatus={handleChangeStatus} handleNotesChange={handleNotesChange}></ReadBooks>
     
-    </>
+    </div>
   )
 }
 
